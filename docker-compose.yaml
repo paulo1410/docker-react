@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes: # típico em ambientes de desenvolvimento
+      - /app/node_modules
+      - .:/app
+  test: # ao invés de criar um test container, poderia aproveitar o
+        # web container com "docker run exec -it [web_id] npm run test"
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes: # típico em ambientes de desenvolvimento
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]  #sobrescreve o comando da imagem
