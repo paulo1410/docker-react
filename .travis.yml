@@ -1,0 +1,10 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t paulo1410/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run paulo1410/docker-react npm run test -- --coverage
+  # -- --coverage  faz com que o teste só rodar 1 vez
