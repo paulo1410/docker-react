@@ -8,3 +8,16 @@ before_install:
 script:
   - docker run paulo1410/docker-react npm run test -- --coverage
   # -- --coverage  faz com que o teste só rodar 1 vez
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-443406838013"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
